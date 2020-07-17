@@ -32,6 +32,7 @@ class EpisodeStatementsController < ApplicationController
 
   def destroy
     find_episode_statement.destroy
+
     redirect_to episode_url(find_episode), notice: 'Statement was successfully destroyed.'
   end
 
@@ -41,12 +42,8 @@ class EpisodeStatementsController < ApplicationController
     Episode.find(params[:episode_id])
   end
 
-  def episode_statement_scope_for_episode
-    EpisodeStatement.where(episode_id: params[:episode_id])
-  end
-
   def find_episode_statement
-    episode_statement_scope_for_episode.find(params[:id])
+    EpisodeStatement.find_by(episode_id: params[:episode_id], id: params[:id])
   end
 
   def episode_statement_params
