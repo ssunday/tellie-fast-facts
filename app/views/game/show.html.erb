@@ -1,22 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @episode.name %></h1>
-<p>Which statement is correct?</p>
+<h1>Episode: <%= @episode.name %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Statement</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= form_tag(game_url(@episode), method: :put) do %>
+  <h2>Which statement is correct?</h2>
+  <% @episode.episode_statements.each do |episode_statement| %>
+    <label>
+      <%= radio_button_tag("statement_id", episode_statement.id) %>
+      <%= episode_statement.statement %>
+    </label>
+  <% end %>
 
-  <tbody>
-    <% @episode.episode_statements.each do |episode_statement| %>
-      <tr>
-        <td><%= episode_statement.statement %></td>
-        <td><%= button_to 'Select', game_path(@episode, statement_id: episode_statement.id), method: :put %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <%= submit_tag 'Submit Answer' %>
+<% end %>

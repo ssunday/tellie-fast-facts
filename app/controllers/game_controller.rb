@@ -4,11 +4,25 @@ class GameController < ApplicationController
   end
 
   def update
-    episode = find_episode
+    @episode = find_episode
 
-    correct = episode.episode_statements.find_by(correct: true, id: params[:statement_id]).present?
+    @correct = @episode.episode_statements.find_by(correct: true, id: params[:statement_id]).present?
 
-    redirect_to game_path(episode), notice: "You are #{correct ? 'correct' : 'incorrect'}!"
+    render :results
+  end
+
+  def leaderboard
+    @episode = find_episode
+
+    game_score = @episode
+                 .game_scores
+                 .find_or_create_by(username: params[:username])
+
+    game_score.update!(score: game_score.score + 1)
+
+    @episode.reload
+
+    render :results
   end
 
   private
