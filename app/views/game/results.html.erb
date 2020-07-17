@@ -12,7 +12,7 @@
 
 <% if defined?(@correct_answers) %>
   <% if @correct_answers.positive? %>
-    <h2>You answered <%= @correct_answers %> correctly! Submit your point to the leaderboard?</h2>
+    <h2>You answered <%= @correct_answers %> correctly! Submit your points to the leaderboard?</h2>
     <%= form_tag(leaderboard_game_url(@episode), method: :post) do %>
       <%= hidden_field_tag :correct_answers, @correct_answers %>
 
