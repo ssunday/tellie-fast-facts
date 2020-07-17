@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @episode.name %></h1>
+<p>Which statement is correct?</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Statement</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @episode.episode_statements.each do |episode_statement| %>
+      <tr>
+        <td><%= episode_statement.statement %></td>
+        <td><%= button_to 'Select', game_path(@episode, statement_id: episode_statement.id), method: :put %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

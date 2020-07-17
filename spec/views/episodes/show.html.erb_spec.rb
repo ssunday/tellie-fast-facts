@@ -5,7 +5,6 @@ RSpec.describe 'episodes/show', type: :view do
     @episode = assign(:episode, Episode.create!(
                                   name: 'Name'
                                 ))
-    @episode_statements = EpisodeStatement.none
   end
 
   it 'renders attributes in <p>' do

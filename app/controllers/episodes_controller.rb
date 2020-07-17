@@ -4,8 +4,7 @@ class EpisodesController < ApplicationController
   end
 
   def show
-    @episode = find_episode
-    @episode_statements = @episode.episode_statements
+    @episode = find_episode(include_statements: true)
   end
 
   def new
@@ -42,8 +41,8 @@ class EpisodesController < ApplicationController
 
   private
 
-  def find_episode
-    Episode.find(params[:id])
+  def find_episode(include_statements: false)
+    (include_statements ? Episode.includes(:episode_statements) : Episode).find(params[:id])
   end
 
   def episode_params

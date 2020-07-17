@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe '/episodes', type: :request do
+  let(:episode) { Episode.create!(name: 'Episode') }
+
   let(:valid_attributes) do
     {
       name: 'Episode Title'
@@ -23,7 +25,6 @@ RSpec.describe '/episodes', type: :request do
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      episode = Episode.create! valid_attributes
       get episode_url(episode)
       expect(response).to be_successful
     end
@@ -38,7 +39,6 @@ RSpec.describe '/episodes', type: :request do
 
   describe 'GET /edit' do
     it 'render a successful response' do
-      episode = Episode.create! valid_attributes
       get edit_episode_url(episode)
       expect(response).to be_successful
     end
@@ -81,7 +81,6 @@ RSpec.describe '/episodes', type: :request do
       end
 
       it 'updates the requested episode' do
-        episode = Episode.create! valid_attributes
         patch episode_url(episode), params: { episode: new_attributes }
 
         episode.reload
@@ -90,7 +89,6 @@ RSpec.describe '/episodes', type: :request do
       end
 
       it 'redirects to the episode' do
-        episode = Episode.create! valid_attributes
         patch episode_url(episode), params: { episode: new_attributes }
         episode.reload
         expect(response).to redirect_to(episode_url(episode))
@@ -99,7 +97,6 @@ RSpec.describe '/episodes', type: :request do
 
     context 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        episode = Episode.create! valid_attributes
         patch episode_url(episode), params: { episode: invalid_attributes }
         expect(response).to be_successful
       end
@@ -107,15 +104,15 @@ RSpec.describe '/episodes', type: :request do
   end
 
   describe 'DELETE /destroy' do
+    let!(:episode) { Episode.create!(name: 'Episode') }
+
     it 'destroys the requested episode' do
-      episode = Episode.create! valid_attributes
       expect do
         delete episode_url(episode)
       end.to change(Episode, :count).by(-1)
     end
 
     it 'redirects to the episodes list' do
-      episode = Episode.create! valid_attributes
       delete episode_url(episode)
       expect(response).to redirect_to(episodes_url)
     end
