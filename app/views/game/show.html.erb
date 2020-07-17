@@ -4,7 +4,7 @@
 
 <%= form_tag(game_url(@episode), method: :put) do %>
   <h2>Which statement is correct?</h2>
-  <% @episode.episode_statements.each do |episode_statement| %>
+  <% @episode.episode_statements.alphabetical.each do |episode_statement| %>
     <label>
       <%= radio_button_tag("statement_id", episode_statement.id) %>
       <%= episode_statement.statement %>
