@@ -18,6 +18,16 @@ div.actions {
   color: green;
 }
 
+.correct {
+  color: $color-green;
+  font-weight: bold;
+}
+
+.incorrect {
+  color: $color-red;
+  font-weight: bold;
+}
+
 .field_with_errors {
   padding: 2px;
   background-color: $color-red;

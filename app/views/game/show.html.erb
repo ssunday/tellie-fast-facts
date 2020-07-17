@@ -3,10 +3,10 @@
 <h1>Episode: <%= @episode.name %></h1>
 
 <%= form_tag(game_url(@episode), method: :put) do %>
-  <h2>Which statement is correct?</h2>
+  <h2>Which statements are true and false? Check if true.</h2>
   <% @episode.episode_statements.alphabetical.each do |episode_statement| %>
     <label>
-      <%= radio_button_tag("statement_id", episode_statement.id) %>
+      <%= check_box_tag('statement_ids[]', episode_statement.id) %>
       <%= episode_statement.statement %>
     </label>
   <% end %>

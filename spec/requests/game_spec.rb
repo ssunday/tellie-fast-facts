@@ -16,23 +16,25 @@ RSpec.describe '/game', type: :request do
     let!(:incorrect_answer) { episode.episode_statements.create!(statement: 'correct test', correct: false) }
 
     it 'assigns correct false on incorrect answer' do
-      patch game_url(episode), params: { statement_id: incorrect_answer.id }
+      patch game_url(episode), params: { statement_ids: [incorrect_answer.id] }
 
       expect(response).to be_successful
-      expect(assigns(:correct)).to eq(false)
+      expect(assigns(:correct_answers)).to eq(0)
+      expect(assigns(:answers)).to eq([incorrect_answer.id.to_s])
     end
 
-    it 'assigns correct true on correct answer' do
-      patch game_url(episode), params: { statement_id: correct_answer.id }
+    it 'assigns correct true on correct answer true/false' do
+      patch game_url(episode), params: { statement_ids: [correct_answer.id] }
 
       expect(response).to be_successful
-      expect(assigns(:correct)).to eq(true)
+      expect(assigns(:correct_answers)).to eq(2)
+      expect(assigns(:answers)).to eq([correct_answer.id.to_s])
     end
   end
 
   describe 'POST /leaderboard' do
     it 'create game score for username if does not exist' do
-      post leaderboard_game_url(episode), params: { username: 'Test' }
+      post leaderboard_game_url(episode), params: { username: 'Test', correct_answers: '1' }
 
       game_score = GameScore.first
 
@@ -46,7 +48,7 @@ RSpec.describe '/game', type: :request do
     it 'updates score if it already exists' do
       game_score = GameScore.create!(episode: episode, username: 'Test', score: 1)
 
-      post leaderboard_game_url(episode), params: { username: 'Test' }
+      post leaderboard_game_url(episode), params: { username: 'Test', correct_answers: '3' }
 
       game_score.reload
 
@@ -54,7 +56,7 @@ RSpec.describe '/game', type: :request do
 
       expect(GameScore.count).to eq(1)
       expect(game_score.username).to eq('Test')
-      expect(game_score.score).to eq(2)
+      expect(game_score.score).to eq(4)
     end
   end
 end

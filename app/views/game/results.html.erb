@@ -1,17 +1,31 @@
-<% if @correct %>
-  <h2>You are correct! Submit your point to the leaderboard?</h2>
-  <%= form_tag(leaderboard_game_url(@episode), method: :post) do %>
-    <%= hidden_field_tag :correct, @correct %>
-
-    <div class="field">
-      <%= label_tag :username %>
-      <%= text_field_tag :username %>
-    </div>
-
-    <%= submit_tag 'Submit to Leaderboard', class: 'button' %>
+<% if defined?(@answers) %>
+  <h2>Results</h2>
+  <% @episode.episode_statements.each do |statement| %>
+    <% if statement.correct %>
+      <% answered_accurately = @answers.include?(statement.id.to_s) %>
+    <% else %>
+      <% answered_accurately = !@answers.include?(statement.id.to_s) %>
+    <% end %>
+    <p class=<%= answered_accurately ? 'correct' : 'incorrect' %>><%= statement.statement %> was <%= statement.correct %> and you answered <%= answered_accurately ? 'correctly': 'incorrectly' %></p>
   <% end %>
-<% elsif defined?(@correct) %>
-  <h2>Sorry, you are incorrect! You get no points.</h2>
+<% end %>
+
+<% if defined?(@correct_answers) %>
+  <% if @correct_answers.positive? %>
+    <h2>You answered <%= @correct_answers %> correctly! Submit your point to the leaderboard?</h2>
+    <%= form_tag(leaderboard_game_url(@episode), method: :post) do %>
+      <%= hidden_field_tag :correct_answers, @correct_answers %>
+
+      <div class="field">
+        <%= label_tag :username %>
+        <%= text_field_tag :username %>
+      </div>
+
+      <%= submit_tag 'Submit to Leaderboard', class: 'button' %>
+    <% end %>
+  <% else %>
+    <h2>Sorry, you answered none of them correctly! You get no points.</h2>
+  <% end %>
 <% end %>
 
 <h2>Leaderboard</h2>
