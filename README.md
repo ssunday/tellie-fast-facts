@@ -19,6 +19,8 @@ View at [http://localhost:3000](http://localhost:3000)
 
 `bundle exec rspec`
 
+Brakeman analysis: `bundle exec brakeman`
+
 ## Linting
 
 `bundle exec rubocop -a -c .rubocop.yml`
