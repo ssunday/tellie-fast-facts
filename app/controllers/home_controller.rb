@@ -1,5 +1,3 @@
 class HomeController < ApplicationController
-  def index
-    render plain: 'Fast Facts'
-  end
+  def index; end
 end

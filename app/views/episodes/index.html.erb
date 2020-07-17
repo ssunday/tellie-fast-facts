@@ -14,6 +14,7 @@
     <% @episodes.each do |episode| %>
       <tr>
         <td><%= episode.name %></td>
+        <td><%= link_to 'Play', game_path(episode) %></td>
         <td><%= link_to 'Show', episode %></td>
         <td><%= link_to 'Edit', edit_episode_path(episode) %></td>
         <td><%= link_to 'Destroy', episode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
