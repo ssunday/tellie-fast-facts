@@ -2,6 +2,11 @@
 
 Fast Facts game app for interview process.
 
+## Requirements
+
+- Postgres
+- Ruby 2.6.6
+
 ## Setup
 
 - `bundle install`
