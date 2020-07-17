@@ -1,6 +1,6 @@
 <% if defined?(@answers) %>
   <h2>Results</h2>
-  <% @episode.episode_statements.each do |statement| %>
+  <% @episode.episode_statements.alphabetical.each do |statement| %>
     <% if statement.correct %>
       <% answered_accurately = @answers.include?(statement.id.to_s) %>
     <% else %>
