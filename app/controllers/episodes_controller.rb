@@ -5,6 +5,7 @@ class EpisodesController < ApplicationController
 
   def show
     @episode = find_episode
+    @episode_statements = @episode.episode_statements
   end
 
   def new

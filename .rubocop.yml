@@ -18,6 +18,8 @@ Rails/FilePath:
 Rails/UniqueValidationWithoutIndex:
   Enabled: false
 
+Layout/LineLength:
+  Enabled: false
 
 Metrics/BlockLength:
   Enabled: false

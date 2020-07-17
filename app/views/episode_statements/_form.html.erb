@@ -1,0 +1,27 @@
+<%= form_for([@episode, episode_statement]) do |form| %>
+  <% if episode_statement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(episode_statement.errors.count, "error") %> prohibited this episode_statement from being saved:</h2>
+
+      <ul>
+        <% episode_statement.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :statement %>
+    <%= form.text_field :statement %>
+  </div>
+
+  <div class="field">
+    <%= form.label :correct, 'Correct?' %>
+    <%= form.check_box :correct %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

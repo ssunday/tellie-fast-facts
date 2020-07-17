@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_17_155742) do
+ActiveRecord::Schema.define(version: 2020_07_17_160941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "episode_statements", force: :cascade do |t|
+    t.bigint "episode_id", null: false
+    t.string "statement"
+    t.boolean "correct", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["episode_id"], name: "index_episode_statements_on_episode_id"
+  end
 
   create_table "episodes", force: :cascade do |t|
     t.string "name", null: false
@@ -21,4 +30,5 @@ ActiveRecord::Schema.define(version: 2020_07_17_155742) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "episode_statements", "episodes"
 end
