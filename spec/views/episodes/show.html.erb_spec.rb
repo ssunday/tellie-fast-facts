@@ -4,7 +4,7 @@ RSpec.describe 'episodes/show', type: :view do
   before(:each) do
     @episode = assign(:episode, Episode.create!(
                                   name: 'Name'
-                      ))
+                                ))
     @episode_statements = EpisodeStatement.none
   end
 
