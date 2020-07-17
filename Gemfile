@@ -17,6 +17,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'shoulda-matchers'
 end
 
