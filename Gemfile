@@ -16,6 +16,10 @@ group :development, :test do
   gem 'rubocop-rails'
 end
 
+group :test do
+  gem 'shoulda-matchers'
+end
+
 group :development do
   gem 'listen', '~> 3.2'
   gem 'web-console', '>= 3.3.0'
