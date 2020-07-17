@@ -8,7 +8,7 @@
       <%= text_field_tag :username %>
     </div>
 
-    <%= submit_tag 'Submit to Leaderboard' %>
+    <%= submit_tag 'Submit to Leaderboard', class: 'button' %>
   <% end %>
 <% elsif defined?(@correct) %>
   <h2>Sorry, you are incorrect! You get no points.</h2>

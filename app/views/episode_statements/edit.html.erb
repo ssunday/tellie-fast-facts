@@ -2,5 +2,7 @@
 
 <%= render 'form', episode_statement: @episode_statement %>
 
-<%= link_to 'Back', episode_path(@episode) %> |
-<%= button_to 'Destroy', [@episode, @episode_statement], method: :delete %>
+<div class="action-row">
+  <%= link_to 'Back', episode_path(@episode), class: 'button' %>
+  <%= button_to 'Destroy', [@episode, @episode_statement], method: :delete, class: 'button button--delete' %>
+</div>

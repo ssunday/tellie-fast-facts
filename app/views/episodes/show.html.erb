@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @episode.name %>
-</p>
+<%= link_to '> Back', episodes_path %>
 
+<h1>Episode:  <%= @episode.name %></h1>
 
-<%= link_to 'Edit', edit_episode_path(@episode) %> |
-<%= link_to 'Back', episodes_path %>
+<div class="action-row">
+  <%= link_to 'Edit', edit_episode_path(@episode), class: 'button' %>
+  <%= link_to 'Destroy', @episode, class: 'button button--delete', method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
 
 <h2>Statements</h2>
 
@@ -31,4 +31,6 @@
   </tbody>
 </table>
 
-<%= link_to 'New Statement', new_episode_episode_statement_path(@episode) %>
+<br>
+
+<%= link_to 'New Statement', new_episode_episode_statement_path(@episode), class: 'button' %>

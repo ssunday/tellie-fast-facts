@@ -1,3 +1,11 @@
-<h1>Fast Facts!</h1>
+<h1>Fast Facts Gameshow!</h1>
+
+<h2>Play a few games?</h2>
+
+<ul>
+  <% @suggested_episodes.each do |episode| %>
+    <li><%= link_to "Play #{episode.name}", game_path(episode) %></td></li>
+  <% end %>
+</ul>
 
 <%= link_to 'Control Episodes', episodes_path %>
