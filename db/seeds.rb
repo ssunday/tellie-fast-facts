@@ -4,6 +4,6 @@ Episode.all.destroy_all
   episode = Episode.create!(name: "Episode #{i}")
 
   (0..4).each do |j|
-    episode.episode_statements.create!(statement: "Statement #{j}", correct: j == 0)
+    episode.episode_statements.create!(statement: "Statement #{j}", correct: j.zero?)
   end
 end
